@@ -45,4 +45,4 @@ In other words, your solution should:
 - Appropriate use of TypeScript
 - Design/UI considerations
 
-Good luck!
+Good luck!# Michelle-searchable
