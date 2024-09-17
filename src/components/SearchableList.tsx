@@ -1,4 +1,5 @@
 import { useDataManagement } from "../hooks/useDataManagement";
+import {useState, useEffect, useMemo} from "react"
 
 const BUTTON_STYLE =
   "h-8 rounded bg-gray-300/20 px-2.5 py-1.5 text-xs hover:bg-gray-300/70 transition-colors duration-200 min-w-24";
@@ -22,8 +23,18 @@ const CHEVRON = (
  * Implement your solution here and also feel free to create new files as needed folder. Although, this is the entry component that will be tested
  */
 
+
 export const SearchableList = () => {
-  const hookResponse = useDataManagement();
+  const {
+    search,
+    items,
+    categories,
+    sortBy,
+    currentPage,
+    categoryFilter,
+    setCategoryFilter,
+    setSearch
+  } = useDataManagement();
 
   /**
    * Use the test id - data-test-id="loading-indicator" for your loader component
@@ -39,6 +50,8 @@ export const SearchableList = () => {
           data-test-id="search-input"
           placeholder="Search by name..."
           className="h-9 w-full rounded-md border px-2 text-sm placeholder:text-xs sm:basis-1/4"
+          value= {search}
+          onChange={(e)=> setSearch(e.target.value)}
         />
 
         <div className="h- hidden min-h-8 w-[1px] bg-neutral-200 sm:flex" />
@@ -77,17 +90,21 @@ export const SearchableList = () => {
         </div>
       </div>
 
+      {items[0].map((item )=> {
       <div className="p-4">
         {/** Good luck */}
 
         {/** Iterate over this component */}
+       
         <div data-test-id="list-item">
-          <p data-test-id="list-item-name">Name</p>
-          <p data-test-id="list-item-description">Description</p>
-          <p data-test-id="list-item-category">Category</p>
-          <p data-test-id="list-item-date">Date</p>
+          <p data-test-id="list-item-name">{item.name}</p>
+          <p data-test-id="list-item-description">{item.description}</p>
+          <p data-test-id="list-item-category">{item.category}</p>
+          <p data-test-id="list-item-date">{item.date}</p>
         </div>
+        
       </div>
+})}
 
       <div
         data-test-id="pagination-controls"
